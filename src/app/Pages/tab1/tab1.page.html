@@ -14,13 +14,13 @@
   </ion-header>
 <ion-grid fixed>
   <ion-row>
-    <ion-col *ngFor="Let article of articles, Let i = index">
+    <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12" *ngFor="let article of articles, let i = index">
       <ion-card>
         <ion-card-subtitle>
           <ion-row>
             <ion-col>
               <span>{{i+1}}. </span>
-              <span>{{article.souce.name}}</span>
+              <span>{{article.source.name}}</span>
            </ion-col>
           </ion-row>
         </ion-card-subtitle>
@@ -28,6 +28,9 @@
           {{article.title}}
         </ion-card-title>
         <ion-img [src]="article.urlToImage"></ion-img>
+        <ion-card-content>
+          <p>{{article.description}}</p>
+        </ion-card-content>
       </ion-card>
     </ion-col>
 
