@@ -19,20 +19,26 @@ export class Tab2Page implements OnInit {
 
 
   ngOnInit(){
-    this.newService.getTopHeadLines(this.page).subscribe(resp=>{
+    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
     console.log(resp);
     this.articles = resp.articles;
     })
   }
 
   segmentChanged(event:any){
-    console.log(event.detail.value);
+    //console.log(event.detail.value);
+    this.infiniteScroll.disabled = false;
+    this.selectedCategory = event.detail.value;
+    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
+      console.log(resp);
+      this.articles = resp.articles;
+      })
   }
 
   loadData(event:any){
     console.log(event);
     this.page +=1;
-    this.newService.getTopHeadLines(this.page).subscribe(resp=>{
+    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
 
       if(resp.articles.length===0){
         this.infiniteScroll.disabled = true;

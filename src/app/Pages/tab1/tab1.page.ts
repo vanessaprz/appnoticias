@@ -12,11 +12,14 @@ export class Tab1Page implements OnInit {
 
   articles:Article[] = [];
   page:number = 1;
-  @ViewChild(IonInfiniteScroll , {static :true}) infiniteScroll:IonInfiniteScroll
+  @ViewChild(IonInfiniteScroll , {static :true}) infiniteScroll:IonInfiniteScroll;
+
   constructor(private newsService:NewsService) {}
 
+
+
   ngOnInit(){
-    this.newsService.getTopHeadLines(this.page).subscribe(resp=>{
+    this.newsService.getTopHeadLines(this.page,'business').subscribe(resp=>{
       console.log(resp);
       this.articles = resp.articles;
     })
@@ -25,7 +28,7 @@ export class Tab1Page implements OnInit {
   loadData(event:any){
     console.log(event);
     this.page +=1;
-    this.newsService.getTopHeadLines(this.page).subscribe(resp=>{
+    this.newsService.getTopHeadLines(this.page,'business').subscribe(resp=>{
 
       if(resp.articles.length===0){
         this.infiniteScroll.disabled = true;

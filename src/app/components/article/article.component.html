@@ -1,6 +1,6 @@
 <ion-card>
   <ion-card-subtitle class="ion-margin">
-    <ion-row class="ion-aling-items-center">
+    <ion-row class="ion-aling-items-center" ((onClick)="openArticle()")>
       <ion-col clas="ion-margin">
         <span class="text-primary">{{index+1}}. </span>
         <span class="article-source-name">{{article.source.name}}</span>
@@ -10,7 +10,7 @@
   <ion-card-title class="ion-padding-horizontal ion-margin-bottom">
     {{article.title}}
   </ion-card-title>
-  <ion-img [src]="article.urlToImage"></ion-img>
+  <ion-img [src]="article.urlToImage" ((onClick)="openArticle()"></ion-img>
   <ion-card-content>
     <p>{{article.description}}</p>
   </ion-card-content>
