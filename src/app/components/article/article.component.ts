@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Article } from 'src/app/interfaces';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { Share } from '@capacitor/share';
 import { ActionSheetController } from '@ionic/angular';
+
 
 
 @Component({
@@ -33,7 +35,7 @@ export class ArticleComponent implements OnInit {
           {
           text:'Share',
           icon : 'share-outline',
-          handler : ()=> this.onOpenArticle()
+          handler : ()=> this.shareArticle()
           },
           {
             text:'Favorites',
@@ -46,14 +48,19 @@ export class ArticleComponent implements OnInit {
               role: 'cancel'
           }
         ]
-    });
+      });
 
     await actionSheet.present();
 
   }
 
-  onOpenArticle(){
-    console.log('share article');
+  async shareArticle(){
+    //console.log('share article');
+    await Share.share({
+      title: this.article.title,
+      text: this.article.source.name,
+      url: this.article.url
+    });
   }
 
   onToggleFavorite(){
