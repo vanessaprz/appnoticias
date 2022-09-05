@@ -13,12 +13,13 @@ export class NewsService {
 
   constructor(private http:HttpClient) { }
 
-  getTopHeadLines(){
+  getTopHeadLines(page:number){
    return this.http.get<NewsResponse>(`${url}/top-headlines`,{
     params : {
       apiKey:apiKey,
       category:'business',
-      country:'us'
+      country:'us',
+      page:page
     }
    })
   }
