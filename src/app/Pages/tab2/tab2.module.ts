@@ -16,7 +16,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    ComponentsModule
+    ComponentsModule    
   ],
   declarations: [Tab2Page]
 })
