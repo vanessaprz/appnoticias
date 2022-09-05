@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { NewsResponse } from '../interfaces';
 
 const apiKey= environment.apiKey;
+const url= environment.url;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,12 @@ export class NewsService {
   constructor(private http:HttpClient) { }
 
   getTopHeadLines(){
-   return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`)
+   return this.http.get<NewsResponse>(`${url}/top-headlines`,{
+    params : {
+      apiKey:apiKey,
+      category:'business',
+      country:'us'
+    }
+   })
   }
 }
