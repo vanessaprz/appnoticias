@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Article } from 'src/app/interfaces';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -8,11 +9,10 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class Tab3Page {
 
-  
-  constructor(private storageService:StorageService) {}
-
   get articles():Article[]{
     return this.storageService.getLocalArticles;
   }
   
+  constructor(private storageService:StorageService) {}
+
 }

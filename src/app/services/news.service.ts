@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NewsResponse } from '../interfaces';
@@ -13,7 +13,7 @@ export class NewsService {
 
   constructor(private http:HttpClient) { }
 
-  getTopHeadLines(page:number,category:string){
+  getTopHeadLines(page:number, category:string){
    return this.http.get<NewsResponse>(`${url}/top-headlines`,{
     params : {
       apiKey:apiKey,

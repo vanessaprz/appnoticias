@@ -9,14 +9,17 @@ export class StorageService {
 
   private _storage: Storage | null = null;
   private _localArticles:Article[] =[];
-
-  get getLocalArticles(){
-    return [...this._localArticles];
-  }
+//no se si esta bien=>
+  //getLocalArticles: Article[];
 
   constructor(private storage:Storage) { 
-  this.init();
+    this.init();
+  
+    }
 
+  
+  get getLocalArticles(){
+    return [...this._localArticles];
   }
 
 
@@ -30,10 +33,10 @@ export class StorageService {
 
   async saveOrRemoveArticle(article:Article){
 
-    const exist = this._localArticles.find(LocaLArticle=>localArticle.title===article.title);
+    const exist = this._localArticles.find(localArticle=>localArticle.title===article.title);
 
     if(exist){
-      this._localArticles = this._localArticles.filter(LocaLArticle=>localArticle.title!==article.title);
+      this._localArticles = this._localArticles.filter(localArticle=>localArticle.title!==article.title);
     }else{
       this._localArticles = [article,...this._localArticles];
     }
@@ -43,8 +46,9 @@ export class StorageService {
 
   async loadFavorites(){
     try {
+
       const articles = await this._storage.get('articles');
-      this._localArticles = articles;
+      this._localArticles = articles || [];
     } catch (error) {
       console.log(error);
       
@@ -52,6 +56,6 @@ export class StorageService {
   }
 
   articlesInFavorites(article:Article){
-    return !!this._localArticles.find(LocaLArticle=>localArticle.title===article.title);
+    return !!this._localArticles.find(localArticle=>localArticle.title===article.title);
   }
 }

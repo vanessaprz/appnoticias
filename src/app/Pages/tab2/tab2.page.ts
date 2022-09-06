@@ -12,33 +12,25 @@ export class Tab2Page implements OnInit {
 
   categories:string[] = ['business','entertainment','general','health','science','sports','technology'];
   selectedCategory:string = this.categories[0];
-  constructor(private newService:NewsService) {}
-  page:number = 1;
+
+  constructor(private newsService:NewsService) {}
   articles:Article[] = [];
-  @ViewChild(IonInfiniteScroll , {static :true}) infiniteScroll:IonInfiniteScroll
+  page:number = 1;
+  @ViewChild(IonInfiniteScroll, {static :true}) infiniteScroll:IonInfiniteScroll;
 
 
   ngOnInit(){
-    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
+    this.newsService.getTopHeadLines(this.page, this.selectedCategory).subscribe((resp)=>{
     console.log(resp);
     this.articles = resp.articles;
     })
   }
 
-  segmentChanged(event:any){
-    //console.log(event.detail.value);
-    this.infiniteScroll.disabled = false;
-    this.selectedCategory = event.detail.value;
-    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
-      console.log(resp);
-      this.articles = resp.articles;
-      })
-  }
 
   loadData(event:any){
     console.log(event);
     this.page +=1;
-    this.newService.getTopHeadLines(this.page,this.selectedCategory).subscribe(resp=>{
+    this.newsService.getTopHeadLines(this.page, this.selectedCategory).subscribe((resp)=>{
 
       if(resp.articles.length===0){
         this.infiniteScroll.disabled = true;
@@ -47,5 +39,15 @@ export class Tab2Page implements OnInit {
       this.articles = [...this.articles,...resp.articles];
       this.infiniteScroll.complete();
     })
+  }
+
+  segmentChanged(event:any){
+    //console.log(event.detail.value);
+    this.infiniteScroll.disabled = false;
+    this.selectedCategory = event.detail.value;
+    this.newsService.getTopHeadLines(this.page, this.selectedCategory).subscribe((resp)=>{
+      console.log(resp);
+      this.articles = resp.articles;
+      })
   }
 }
